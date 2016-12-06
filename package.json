@@ -1,0 +1,17 @@
+{
+    "name": "PhotoServer",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "express": "3.12.1",
+        "ejs": "1.0.0",
+        "socket.io": "1.0.6",
+        "formidable": "1.0.15",
+        "mongoose": "~3.8.*",
+        "ws": "0.4.31",
+        "validator": "3.16.1"
+    }
+}

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>PORTABLE PROJECTOR</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/jquery.fancybox.css">
+    <style>
+     body {
+       padding-top: 60px;
+     }
+    </style>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="wrap">
+      <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Portable Projector</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li class="active"><a href="/">Photos</a></li>
+                <li><a href="/status">Information</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="page-header">
+          <h1><a href="" onclick="location.reload()">PHOTOS (<%= photos.length %>)</a></h1>
+        </div>
+        <div id="photos" class="row">
+          <% photos.forEach(function(photo) {%>
+          <div class="<%= photo.name.replace(/\./g, '-') %> photo span3">
+            <p><%= photo.name %></p>
+            <a class="box" data-fancybox-group="gallery" href="/rawImage?name=<%= photo.name %>" title="<%= photo.name %>">
+              <img src="/thumbnail?name=<%= photo.name%>" />          
+            </a>
+            <br/>
+            <input class="btn" name="<%= photo.name %>" type="submit" onclick="sendPhoto(this.name)" value="Send">
+            <input class="btn" name="<%= photo.name %>" type="submit" onclick="removePhoto(this.name)" value="Delete">
+          </div>
+          <% }) %>
+        </div>
+      </div>
+
+      <p id="page-top"><a href="#wrap">PAGE TOP</a></p>
+    </div>
+    <script src="/javascripts/jquery-2.1.1.min.js"></script>
+    <script src="/javascripts/box/jquery.fancybox.js"></script>
+    <script src="/javascripts/notify.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/javascripts/list.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+     $(document).ready(function() {
+       $('.box').fancybox({
+         closeClick : true
+       });
+     });
+
+     $(function() {
+       var topBtn = $('#page-top');    
+       topBtn.hide();
+       $(window).scroll(function () {
+         if ($(this).scrollTop() > 100) {
+           topBtn.fadeIn();
+         } else {
+           topBtn.fadeOut();
+         }
+       });
+       topBtn.click(function () {
+         $('body,html').animate({
+           scrollTop: 0
+         }, 500);
+         return false;
+       });
+     });
+    </script>
+  </body>
+</html>

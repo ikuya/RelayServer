@@ -1,0 +1,10 @@
+{
+    "port" : "COMMENT: Set the listening port for http server.",
+    "port" : 80,
+
+    "websocket_port" : "COMMENT: Set the listening port for websocket server",
+    "websocket_port" : 8080,
+
+    "db" : "COMMENT: Set the db name for MongoDB",
+    "db" : "images"
+}

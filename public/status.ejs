@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>MACHINE INFORMATION</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <style>
+     body {
+       padding-top: 60px;
+     }
+    </style>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/">Portable Projector</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li><a href="/">Photos</a></li>
+              <li class="active"><a href="/status">Information</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="container">
+      <div class="page-header">
+        <h1><a href="" onclick="location.reload()">MACHINE INFORMATION</a></h1>
+      </div>
+      <div id="status">
+        <div class="row">
+        <% ips.forEach(function(ip) {%>
+          <div class="<%= ip.replace(/\./g, '-') %> status span12">
+            <table>
+              <tr><td colspan="2" class="name"># <%= ip %></td></tr>
+              <tr>
+                <th class="key">CPU</th>
+                <td class="value cpu">---</td>
+              </tr>
+              <tr>
+                <th class="key">Memory</th>
+                <td class="value mem">---</td>
+              </tr>
+              <tr>
+                <th class="key">Read Disk</th>
+                <td class="value rd">---</td>
+              </tr>
+              <tr>
+                <th class="key">Write Disk</th>
+                <td class="value wd">---</td>
+              </tr>
+            </table>
+            <img src=""><br/>
+            <input type="submit" name="<%= ip.replace(/\./g, '-') %>" value="Refresh" onclick="refreshImage(this.name)">
+          </div>
+        <% }) %>
+        </div>
+      </div>
+    </div>
+
+    <script src="/javascripts/jquery-2.1.1.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/javascripts/status.js"></script>
+  </body>
+</html>
